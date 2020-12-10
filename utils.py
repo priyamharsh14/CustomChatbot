@@ -33,10 +33,10 @@ def get_dataset(tokenizer, dataset_path, dataset_cache):
     dataset_path = dataset_path or PERSONACHAT_URL
     dataset_cache = dataset_cache + '_' + type(tokenizer).__name__  # To avoid using GPT cache for GPT-2 and vice-versa
     if dataset_cache and os.path.isfile(dataset_cache):
-        print("[!] Load tokenized dataset from cache at %s", dataset_cache)
+        print("[!] Load tokenized dataset from cache at " + str(dataset_cache))
         dataset = torch.load(dataset_cache)
     else:
-        print("[!] Download dataset from %s", dataset_path)
+        print("[!] Download dataset from " + str(dataset_path))
         personachat_file = cached_path(dataset_path)
         with open(personachat_file, "r", encoding="utf-8") as f:
             dataset = json.loads(f.read())
