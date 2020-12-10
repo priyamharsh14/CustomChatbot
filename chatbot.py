@@ -101,9 +101,8 @@ class ChatBot():
 		add_special_tokens_(self.model, self.tokenizer)
 		print("DONE")
 
-		if not os.path.isfile("./dataset_cache" + '_' + type(self.tokenizer).__name__):
-			print("[!] NOTE: THE FOLLOWING PROCESS WILL TAKE SOME TIME.")
-			print("[!] NOTE: DO NOT EXIT THE PROGRAM DURING THE PROCESS.")
+		print("[!] NOTE: THE FOLLOWING PROCESS WILL TAKE SOME TIME.")
+		print("[!] NOTE: DO NOT EXIT THE PROGRAM DURING THE PROCESS.")
 		print("[+] Loading dataset.. ", end="")
 		self.dataset = get_dataset(self.tokenizer, "", "./dataset_cache")
 		print("DONE")
