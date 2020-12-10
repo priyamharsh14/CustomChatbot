@@ -1,6 +1,11 @@
+import os
 import time
 import asyncio
+from itertools import chain
 from quart import Quart, websocket, request, render_template
+
+import torch
+import torch.nn.functional as F
 from transformers import OpenAIGPTLMHeadModel, OpenAIGPTTokenizer, GPT2LMHeadModel, GPT2Tokenizer
 
 from chatbot import generate_reply
