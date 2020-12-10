@@ -104,7 +104,7 @@ class ChatBot():
 		print("[!] NOTE: THE FOLLOWING PROCESS WILL TAKE SOME TIME.")
 		print("[!] NOTE: DO NOT EXIT THE PROGRAM DURING THE PROCESS.")
 		print("[+] Loading dataset.. ")
-		self.dataset = get_dataset(self.tokenizer, "personachat_self_original.json", "./dataset_cache")
+		self.dataset = get_dataset(self.tokenizer, "", "./dataset_cache")
 		print("[+] DONE")
 
 	def generate_reply(self, personality, history, message):
