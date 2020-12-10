@@ -1,6 +1,7 @@
 import time
 import asyncio
 from quart import Quart, websocket, request, render_template
+from transformers import OpenAIGPTLMHeadModel, OpenAIGPTTokenizer, GPT2LMHeadModel, GPT2Tokenizer
 
 from chatbot import generate_reply
 from train import add_special_tokens_
