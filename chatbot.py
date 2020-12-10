@@ -94,7 +94,7 @@ class ChatBot():
 		self.tokenizer = self.tokenizer_class.from_pretrained(self.model_checkpoint)
 		self.model = self.model_class.from_pretrained(self.model_checkpoint)
 		self._device = "cuda" if torch.cuda.is_available() else "cpu"
-		self.model.to(_device)
+		self.model.to(self._device)
 		print("DONE")
 
 		print("[+] Adding special tokens.. ", end="")
