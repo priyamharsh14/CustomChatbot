@@ -11,4 +11,4 @@ chatbot = ChatBot()
 async def homepage():
 	return await 'HOMEPAGE'
 
-app.run()
+app.run(host="34.87.31.38", port=5000)
