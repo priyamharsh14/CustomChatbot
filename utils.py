@@ -41,6 +41,8 @@ def get_dataset(tokenizer, dataset_path, dataset_cache):
         with open(personachat_file, "r", encoding="utf-8") as f:
             dataset = json.loads(f.read())
 
+        print("[!] NOTE: THE FOLLOWING PROCESS WILL TAKE SOME TIME.")
+		print("[!] NOTE: DO NOT EXIT THE PROGRAM DURING THE PROCESS.")
         print("[!] Tokenize and encode the dataset")
         def tokenize(obj):
             if isinstance(obj, str):
