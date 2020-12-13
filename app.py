@@ -9,6 +9,6 @@ chatbot = ChatBot()
 
 @app.route('/', methods=['GET'])
 async def homepage():
-	return await 'HOMEPAGE'
+	return 'HOMEPAGE'
 
 app.run()
