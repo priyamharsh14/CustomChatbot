@@ -1,4 +1,5 @@
 import os
+import random
 from itertools import chain
 
 import torch
@@ -110,5 +111,8 @@ class ChatBot():
 		with torch.no_grad():
 			out_ids = sample_sequence(personality, history, self.tokenizer, self.model, self._device)
 		history.append(out_ids)
-		history = history[-(2*20+1):]
-		return str(self.tokenizer.decode(out_ids, skip_special_tokens=True))
+		# history = history[-(2*20+1):]
+		return str(self.tokenizer.decode(out_ids, skip_special_tokens=True)), history
+	
+	def get_random_personality(self):
+		return random.choice([dialog["personality"] for dataset in dataset.values() for dialog in self.dataset])
