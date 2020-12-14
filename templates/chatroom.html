@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>CC</title>
+	</head>
+	<body>
+		<h2>Welcome, {{ username }}. [<a href="/logout">LOGOUT</a>]</h2>
+		<textarea id="messages" style="width: 90%; height: 40%;"></textarea>
+		<br>
+		<input type="text" id="msg" placeholder="Type your message">
+		<button type="button" id="sendmsg">SEND</button>
+		<script type="text/javascript">
+		var msgbox = document.getElementById('messages');
+		var ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/bot');
+		ws.onmessage = (event) => {
+			var data = String(event.data);
+			if(data.startsWith("[HISTORY]")) {
+				msgbox.innerHTML += data.slice(9) + "\n";
+			}
+			else if(data.startsWith("[REPLY]")) {
+				msgbox.innerHTML += "BOT: " + data.slice(7) + "\n";
+			}
+		};
+		ws.onopen = () => {
+			msgbox.innerHTML += "[CONNECTED TO BOT]\n";
+			var sendButton = document.getElementById('sendmsg');
+			var msgInput = document.getElementById('msg');
+			sendButton.onclick = () => {
+				var msg = msgInput.value;
+				msgbox.innerHTML += "{{ username }}: " + msg + "\n";
+				ws.send(msg);
+			};
+			msgInput.addEventListener("keyup", (event) => {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					sendButton.click();
+					msgInput.value = "";
+				}
+			})
+		};
+		</script>
+	</body>
+</html>
