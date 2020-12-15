@@ -3,10 +3,22 @@
         <title>CC</title>
     </head>
     <body>
+        <div style="color: red;">
+            {% if error %}
+            <p>{{ error }}</p>
+            {% endif %}
+        </div>
+        <br>
         <form method="POST">
-            <input type="text" name="username" placeholder="Enter a username">
+            <label>Enter your username: </label>
+            <input type="text" name="username" placeholder="Eg. cooldevOP">
             <br>
+            <label>Enter a tag:</label>
+            <input type="text" name="tag" placeholder="Eg. art, anime, maths etc.">
+            <br><br>
             <button type="submit">LET'S CHAT</button>
         </form>
+        <br>
+        <p>NOTE: Your username must only contain alphanumeric characters, and your tag should only consist of a single English word.</p>
     </body>
 </html>
