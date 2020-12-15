@@ -75,5 +75,3 @@ async def chatsocket():
 			raise
 	else:
 		return 'Forbidden', 403
-
-app.run()
