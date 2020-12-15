@@ -60,12 +60,6 @@ async def chatsocket():
 		chats_path = "chats/" + session['username'] + ".json"
 		user_data = json.load(open(chats_path))
 		try:
-			for i in range(-4, 0):
-				msg = chatbot.tokenizer.decode(user_data['history'][i])
-				if i % 2 == 0:
-					await websocket.send(f"[HISTORY]{user_data['username']}: {msg}")
-				else:
-					await websocket.send(f"[HISTORY]BOT: {msg}")
 			while True:
 				data = await websocket.receive()
 				user_data, reply = chatbot.generate_reply(user_data, data)
