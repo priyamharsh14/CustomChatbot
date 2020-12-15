@@ -14,7 +14,7 @@ app.secret_key = app.config['BOTSECRET']
 
 chatbot = ChatBot()
 
-check_params = lambda params, req_form: all(list(map(lambda x: x in req_form and req_form[x].strip()!="", params)))
+check_params = lambda params, req_form: all(list(map(lambda x: x in req_form and str(req_form[x]).strip(), params)))
 
 @app.route('/', methods=['GET', 'POST'])
 async def home():
