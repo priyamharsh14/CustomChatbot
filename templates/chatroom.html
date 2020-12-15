@@ -37,6 +37,9 @@
 				}
 			})
 		};
+		ws.onclose = () => {
+			msgbox.innerHTML += "[BOT DISCONNECTED]\n";
+		};
 		</script>
 	</body>
 </html>

@@ -85,7 +85,7 @@ def sample_sequence(personality, history, tokenizer, model, device, current_outp
 
 	return current_output
 
-# personality = [tokenizer.convert_tokens_to_ids(tokenizer.tokenize(persona)) for persona in personality]
+# personality = [249, 1119, %%%%, 239] - I love ___.
 
 class ChatBot():
 	def __init__(self):
@@ -106,13 +106,14 @@ class ChatBot():
 		self.dataset = get_dataset(self.tokenizer, "", "./dataset_cache")
 		print("[+] DONE")
 
-	def generate_reply(self, personality, history, message):
-		history.append(self.tokenizer.encode(message))
+	def generate_reply(self, user_data, message):
+		user_data['history'].append(self.tokenizer.encode(message))
 		with torch.no_grad():
-			out_ids = sample_sequence(personality, history, self.tokenizer, self.model, self._device)
-		history.append(out_ids)
-		# history = history[-(2*20+1):]
-		return str(self.tokenizer.decode(out_ids, skip_special_tokens=True)), history
+			out_ids = sample_sequence(user_data['persona'], user_data['history'], self.tokenizer, self.model, self._device)
+		user_data['history'].append(out_ids)
+		return user_data, str(self.tokenizer.decode(out_ids, skip_special_tokens=True))
 	
-	def get_random_personality(self):
-		return random.choice([dialog["personality"] for dataset in dataset.values() for dialog in self.dataset])
+	def get_random_personality(self, tag):
+		personality = random.choice([dialog["personality"] for dataset in self.dataset.values() for dialog in dataset])
+		personality.append([249, 1119, tag, 239])
+		return personality
