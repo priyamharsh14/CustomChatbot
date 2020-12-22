@@ -59,12 +59,14 @@ async def chatsocket():
 	if check_params(['username', 'tag'], session):
 		chats_path = "chats/" + session['username'] + ".json"
 		user_data = json.load(open(chats_path))
+		# TODO: send some previous chat history
 		try:
 			while True:
 				data = await websocket.receive()
 				user_data, reply = chatbot.generate_reply(user_data, data)
 				await websocket.send(f"[REPLY]{reply}")
 		except asyncio.CancelledError:
+			# chat history will be saved only if the user disconnect or logout
 			with open(chats_path, 'w') as fp:
 				temp = {
 					"username": user_data['username'],
